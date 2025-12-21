@@ -41,9 +41,9 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          pak-version: repo
           extra-packages: any::rcmdcheck
           needs: check
+          cache-version: 2025-12-21-1
 
       - uses: r-lib/actions/check-r-package@v2
         with:
