@@ -9,7 +9,7 @@ cor2cov_lavaan <- function(R, sds, names = NULL) {
   ns <- asNamespace("lavaan")
   
   if ("lav_cor2cov" %in% getNamespaceExports("lavaan") && 
-    exists("lav_cor2cov", envir=ns, inhereits = FALSE)){
+    exists("lav_cor2cov", envir=ns, inherits = FALSE)){
     fun <- get("lav_cor2cov", envir=ns, inherits = FALSE)
     fun(R=R, sds = sds, names=names)
   } else {
