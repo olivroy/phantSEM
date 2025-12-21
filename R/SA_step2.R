@@ -180,7 +180,7 @@ if (length(defaultname>0)){
         matrix(NA, nrow = nrow(newmat), ncol = ncol(newmat)), c(NA)
       ))), 1)
 
-    covlist[[1]] <- lavaan::lav_cor2cov(R = corlist[[1]], sd = sqrt(var_phant))
+    covlist[[1]] <- cor2cov_lavaan(R = corlist[[1]], sd = sqrt(var_phant))
 
     combos <- list(NA)
   } else {
@@ -308,7 +308,7 @@ if (length(defaultname>0)){
       ))), nrow(combos))
 
     for (i in 1:nrow(combos)) {
-      covlist[[i]] <- lavaan::lav_cor2cov(R = corlist[[i]][[1]], sd = sqrt(var_phant))
+      covlist[[i]] <- cor2cov_lavaan(R = corlist[[i]][[1]], sd = sqrt(var_phant))
     }
   }
 
