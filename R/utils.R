@@ -6,8 +6,12 @@ cor2cov_lavaan <- function(R, sds, names = NULL) {
   stopifnot(is.matrix(R), nrow(R) == ncol(R))
   if (length(sds) != nrow(R)) stop("length(sds) must match nrow(R).")
   
-  if ("lav_cor2cov" %in% getNamespaceExports("lavaan")) {
-    lavaan::lav_cor2cov(R = R, sds = sds, names = names)
+  ns <- asNamespace("lavaan")
+  
+  if ("lav_cor2cov" %in% getNamespaceExports("lavaan") && 
+    exists("lav_cor2cov", envir=ns, inhereits = FALSE)){
+    fun <- get("lav_cor2cov", envir=ns, inherits = FALSE)
+    fun(R=R, sds = sds, names=names)
   } else {
     lavaan::cor2cov(R = R, sds = sds, names = names)
   }
