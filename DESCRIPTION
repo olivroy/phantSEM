@@ -1,13 +1,13 @@
 Package: phantSEM
 Title: Create Phantom Variables in Structural Equation Models for Sensitivity Analyses 
-Version: 1.0.0.0
+Version: 1.0.1
 Authors@R: 
     person("Alexis", "Georgeson", , "georgeson.alexis@gmail.com", role = c("aut", "cre","cph"),
            comment = c(ORCID = "0000-0002-6426-9258"))
 Description: Create phantom variables, which are variables that were not observed, for the purpose of sensitivity analyses for structural equation models. The package makes it easier for a user to test different combinations of covariances between the phantom variable(s) and observed variables. The package may be used to assess a model's or effect's sensitivity to temporal bias (e.g., if cross-sectional data were collected) or confounding bias. 
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 URL: https://github.com/argeorgeson/phantSEM
 BugReports: https://github.com/argeorgeson/phantSEM/issues
 Imports: 

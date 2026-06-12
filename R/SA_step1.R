@@ -113,15 +113,15 @@ SA_step1 <- function(lavoutput, # lavaan object
   message(paste("Here are the phantom covariance matrix parameters (copy and paste and add values/names for step2):\n
               "))
   q <- paste0('"', sort(unique(parname)), '"', collapse = "= ,\n")
-  cptext <- paste0("phantom_assignment <-(", q, "= )")
+  cptext <- paste0("phantom_assignment <- list(", q, "= )")
   message(cptext)
   # print(paste0(sort(unique(parname)),collapse='","'),quote=FALSE) #old
-  message("\n Choose the names of the phantom covariances that you want to fix to single values and put in a vector. These will be used for the fixed_names argument in the SA_step2 function.  The phantom covariance parameters that you want to vary should be put in a list and used as the test_names argument. ")
+  #message("\n Choose the names of the phantom covariances that you want to fix to single values and put in a vector. These will be used for the fixed_names argument in the SA_step2 function.  The phantom covariance parameters that you want to vary should be put in a list and used as the test_names argument. ")
   message("Here are the observed covariance matrix parameters:\n")
   obscov <- paste0(sort(setdiff(namemat[lower.tri(namemat)], unique(parname))),collapse=",")
   message(obscov,"\n")
   #print(sort(setdiff(namemat[lower.tri(namemat)], unique(parname))))
-  message("Choose which values you want to use for your fixed parameters and put their names in a vector (fixed_values). Make sure the order is the same for both vectors.")
+  message("Choose which values you want to use for your phantom covariances.")
   return(list(
     matrix_template = matrix_template,
     Phantom_covs = parname,

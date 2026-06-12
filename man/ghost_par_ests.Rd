@@ -11,7 +11,7 @@ ghost_par_ests(step3, parameter_label, remove_NA = FALSE)
 
 \item{parameter_label}{The label used for the parameter in the lavaan code.}
 
-\item{remove_NA}{Remove rows for combinations of phantom variable parameters that resulted in inadmissable solutions in lavaan.}
+\item{remove_NA}{Remove rows for combinations of phantom variable parameters that resulted in inadmissible solutions in lavaan.}
 }
 \value{
 A dataframe of the parameter estimates from the lavaan model.

@@ -3,7 +3,7 @@
 #' `ghost_par_ests()` Selects certain parameter estimates from the output of the sensitivity analysis.
 #' @param step3 The object returned from SA_step3.
 #' @param parameter_label The label used for the parameter in the lavaan code.
-#' @param remove_NA Remove rows for combinations of phantom variable parameters that resulted in inadmissable solutions in lavaan.
+#' @param remove_NA Remove rows for combinations of phantom variable parameters that resulted in inadmissible solutions in lavaan.
 #' @returns A dataframe of the parameter estimates from the lavaan model.
 #' @importFrom stats na.omit
 #' @export

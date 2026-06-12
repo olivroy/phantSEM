@@ -98,5 +98,5 @@ b_results <- ghost_par_ests(
 head(b_results)
 ```
 ## Help
-If you encounter errors in the package, please file an issue with a minimal reproducible example on Github or email the package maintainer. 
+If you encounter errors in the package, please submit an issue with a minimal reproducible example on Github or email the package maintainer. 
 

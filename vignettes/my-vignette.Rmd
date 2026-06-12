@@ -79,48 +79,12 @@ Step1 <- SA_step1(
 This function prints the names of the phantom covariance parameters which will be used in the next function. Those parameters are: "CovM1M2","CovM1X","CovM1Y2","CovY1M1","CovY1M2","CovY1X","CovY1Y2","VarM1","VarY1".  The function also provides the names of the observed covariance parameters for the user's reference. 
 
 ### SA_step2 
-The second step of the sensitivity analysis is to create covariance matrices that the phantom model will be fit to. To do this, the user must provide information about how the phantom variables covary with the observed variables.  For this example, the user may wish to test different values for "CovM1M2", "CovY1Y2", "CovY1M2" and "CovM1Y2" and fix the other phantom covariances to single values. The easiest way to create the arguments for SA_step2 is to copy and paste the list of parameter names from SA_step1 and remove the names of the parameters they want to vary. 
+The second step of the sensitivity analysis is to create covariance matrices that the phantom model will be fit to. To do this, the user must provide information about how the phantom variables covary with the observed variables.  For this example, the user may wish to test different values for "CovM1M2", "CovY1Y2", "CovY1M2" and "CovM1Y2" and fix the other phantom covariances to single values. The easiest way to create the arguments for SA_step2 is to copy and paste the list of parameter names from the output of SA_step1 and add values.
+
+There are several ways to specify the values for the phantom parameters. The first is to assign a single value, such as "CovM1X" = 0, or a list of values, such as "CovM1M2= seq(0,.6,.1). The other is to set it equal to another parameter, such as an observed parameter or another phantom parameter. In this case, if we wanted to make CovY1Y2 equal to CovM1M2, we would simply put "CovY1Y2"="CovM1M2" and the values for CovM1M2 would be used for CovY1Y2 as well. 
 
 ```{r}
-fixed_names <- c(
-  "CovM1X",
-  "CovY1M1",
-  "CovY1X",
-  "VarM1",
-  "VarY1"
-)
-```
 
-Now that the phantom parameters that will be fixed to single values have been put into a vector, the user must define a vector of the same length that provides the values that these parameters will be fixed at. For this example, random assignment would suggest that CovM1X and CovY1X would be zero and the variances for the phantom variables can be set at 1. That leaves CovY1M1, which can be fixed to be equal to CovY2M2
-```{r}
-fixed_values <- c(0, "CovY2M2", 0, 1, 1)
-```
-The next arguments that the user has to define are the parameters that will be varied. This is done by creating a list of the names of the parameters. If we wanted to vary all four of these parameters, we could write this argument as follows: 
-
-```{r}
-test_names <- list("CovM1M2", "CovY1Y2", "CovY1M2", "CovM1Y2")
-```
-
-However, suppose that we would like to allow CovM1M2 and CovY1Y2 to be equal and CovY1M2 and CovM1Y2 to be equal. we can choose that option by writing the test_names list as follows: 
-
-```{r}
-test_names <- list(c("CovM1M2", "CovY1Y2"), c("CovY1M2", "CovM1Y2"))
-```
-
-The next argument tells the function a sequence of values to use for the parameters.  The user could provide a vector of values, or a sequence using `seq()`.  
-
-```{r}
-test_values <- list(seq(0, .6, .1), seq(-.6, .6, .1))
-```
-
-Now we are ready to use `SA_step2` 
-
-```{r}
-# Step2 <- SA_step2(fixed_names=fixed_names,
-#                  fixed_values=fixed_values,
-#                  test_names=test_names,
-#                  test_values=test_values,
-#                  step1=Step1)
 
 phantom_assignment <- list(
   "CovM1X" = 0,
@@ -160,7 +124,7 @@ Step3 <- SA_step3(
 
 The function returns a list of four objects.  The first object is a list of the lavaan output from each model, the second object is the list of covariance matrices used for each model, the third object is a list of correlation matrices, and the fourth object is the data frame of phantom covariance combinations. 
 
-At this point, the sensitivity analysis is complete, but the results are not in the most user-friendly form. The package contains a function to help to organize the results so that they can be examined or plotted.  This function is called `ghost_par_ests` and it is used to pull out parameter estimatesfor a particular parameter (which must be named) from each phantom covariance combination. It has three arguments: step3 is the results from `SA_step3`, parameter_label is the label used in the lavaan code to identify the parameter of interest, and `remove_NA` is a logical object indicating whether the results returned by the function should include rows in which the model did not produce estimates. 
+At this point, the sensitivity analysis is complete, but the results are not in the most user-friendly form. The package contains a function to help to organize the results so that they can be examined or plotted.  This function is called `ghost_par_ests` and it is used to pull out parameter estimates for a particular parameter (which must be named) from each phantom covariance combination. It has three arguments: step3 is the results from `SA_step3`, parameter_label is the label used in the lavaan code to identify the parameter of interest, and `remove_NA` is a logical object indicating whether the results returned by the function should include rows in which the model did not produce estimates. 
 
 Let's see what the b-estimates would be for our example. The output from this function is a data frame that has the values of the phantom covariances that were varied as well as the lavaan output for the chosen parameter.
 ```{r}

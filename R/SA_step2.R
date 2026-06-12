@@ -132,7 +132,7 @@ SA_step2 <- function(phantom_assignment, # list of all phantom parameter names w
 
   # find remaining phantom parameters that will be set to default test values
   defaultname <- setdiff(unique(parname), names(pa))
-
+if (length(defaultname>0)){
   defaultnamelist <- list(NA)
   defaultnametable <- data.frame(matrix(nrow = 0, ncol = 1))
   # counter
@@ -142,7 +142,7 @@ SA_step2 <- function(phantom_assignment, # list of all phantom parameter names w
    # print(j)
     testnametable <- rbind(testnametable, defaultname[i])
     testnamelist[[j]] <- list(name = defaultname[i], values = seq(-.3, .3, .1))
-  }
+  }} else{}
 
 
   # make sure the phantom variable name is correct --removed
@@ -180,7 +180,7 @@ SA_step2 <- function(phantom_assignment, # list of all phantom parameter names w
         matrix(NA, nrow = nrow(newmat), ncol = ncol(newmat)), c(NA)
       ))), 1)
 
-    covlist[[1]] <- lavaan::cor2cov(R = corlist[[1]], sd = sqrt(var_phant))
+    covlist[[1]] <- cor2cov_lavaan(R = corlist[[1]], sds = sqrt(var_phant))
 
     combos <- list(NA)
   } else {
@@ -308,7 +308,7 @@ SA_step2 <- function(phantom_assignment, # list of all phantom parameter names w
       ))), nrow(combos))
 
     for (i in 1:nrow(combos)) {
-      covlist[[i]] <- lavaan::cor2cov(R = corlist[[i]][[1]], sd = sqrt(var_phant))
+      covlist[[i]] <- cor2cov_lavaan(R = corlist[[i]][[1]], sds = sqrt(var_phant))
     }
   }
 

@@ -57,6 +57,9 @@ obs_output <- lavaan::sem(model = observed, sample.cov = covmatrix, sample.nobs 
 summary(obs_output)
 #> Length  Class   Mode 
 #>      1 lavaan     S4
+```
+
+``` r
 # lavaan syntax for phantom variable model
 phantom <- " M2 ~ M1 + Y1 + a*X
                 Y2 ~ M1 + Y1 + b*M2 + cp*X "
@@ -69,7 +72,7 @@ Step1 <- SA_step1(
 #> Here are the phantom covariance matrix parameters (copy and paste and add values/names for step2):
 #> 
 #> 
-#> phantom_assignment <-( "CovM1M2"= ,
+#> phantom_assignment <-("CovM1M2"= ,
 #> "CovM1X"= ,
 #> "CovM1Y2"= ,
 #> "CovY1M1"= ,
@@ -77,12 +80,15 @@ Step1 <- SA_step1(
 #> "CovY1X"= ,
 #> "CovY1Y2"= ,
 #> "VarM1"= ,
-#> "VarY1" = )
+#> "VarY1"= )
 #> 
 #>  Choose the names of the phantom covariances that you want to fix to single values and put in a vector. These will be used for the fixed_names argument in the SA_step2 function.  The phantom covariance parameters that you want to vary should be put in a list and used as the test_names argument.
 #> Here are the observed covariance matrix parameters:
-#> [1] "CovXM2"  "CovXY2"  "CovY2M2"
+#> CovXM2,CovXY2,CovY2M2
 #> Choose which values you want to use for your fixed parameters and put their names in a vector (fixed_values). Make sure the order is the same for both vectors.
+```
+
+``` r
 
 phantom_assignment <- list(
   "CovM1X" = 0,
@@ -99,19 +105,6 @@ Step2 <- SA_step2(
   phantom_assignment = phantom_assignment,
   step1 = Step1
 )
-#> [1] 1
-#> [1] 2
-#> [1] 3
-#> [1] TRUE
-#> [1] TRUE
-#> [1] TRUE
-#> [1] 0
-#> [1] TRUE
-#> [1] 0
-#> [1] TRUE
-#> [1] 1
-#> [1] TRUE
-#> [1] 1
 Step3 <- SA_step3(
   step2 = Step2,
   n = 200
@@ -142,5 +135,5 @@ head(b_results)
 
 ## Help
 
-If you encounter errors in the package, please file an issue with a
+If you encounter errors in the package, please submit an issue with a
 minimal reproducible example on Github or email the package maintainer.
